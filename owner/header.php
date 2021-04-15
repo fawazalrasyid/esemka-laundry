@@ -21,6 +21,7 @@
 
 <body>
     <div id="app">
+        
         <!-- Sidebar -->
         <div id="sidebar" class='active'>
             <div class="sidebar-wrapper active">

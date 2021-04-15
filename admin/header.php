@@ -20,6 +20,7 @@
 
 <body>
     <div id="app">
+
         <!-- Sidebar -->
         <div id="sidebar" class='active'>
             <div class="sidebar-wrapper active">
@@ -89,7 +90,7 @@
         <!-- End Sidebar -->
 
         <div id="main">
-
+            
             <!-- Navbar -->
             <nav class="navbar navbar-header navbar-expand navbar-light">
                 <a class="sidebar-toggler" href="#"><span class="navbar-toggler-icon"></span></a>

@@ -31,107 +31,82 @@ if (isset($_POST['btn-simpan'])) {
 
 require 'header.php';
 ?>
-<div class="content">
-    <div class="page-inner">
-        <div class="page-header">
-            <h4 class="page-title">Forms</h4>
-            <ul class="breadcrumbs">
-                <li class="nav-home">
-                    <a href="index.php">
-                        <i class="flaticon-home"></i>
-                    </a>
-                </li>
-                <li class="separator">
-                    <i class="flaticon-right-arrow"></i>
-                </li>
-                <li class="nav-item">
-                    <a href="transaksi.php">Transaksi</a>
-                </li>
-                <li class="separator">
-                    <i class="flaticon-right-arrow"></i>
-                </li>
-                <li class="nav-item">
-                    <a href="#"><?= $title; ?></a>
-                </li>
-            </ul>
-            <?php if (isset($_SESSION['msg']) && $_SESSION['msg'] <> '') { ?>
-                <div class="alert alert-success" role="alert" id="msg">
-                    <?= $_SESSION['msg']; ?>
-                </div>
-            <?php }
-            $_SESSION['msg'] = ''; ?>
-        </div>
-        <div class="row">
-            <div class="col-md-10">
+
+<!-- Content -->
+<div class="main-content container-fluid">
+
+    <div class="page-title mb-5">
+        <h3><?= $title; ?></h3>
+    </div>
+
+    <section class="section">
+        <!-- Basic Vertical form layout section start -->
+        <section id="basic-vertical-layouts">
+            <div class="col-md-10 col-12">
                 <div class="card">
                     <div class="card-header">
-                        <div class="card-title"><?= $title; ?></div>
+                        <h4 class="card-title">Data Pembayaran</h4>
                     </div>
-                    <form action="" method="POST">
+                    <div class="card-content">
                         <div class="card-body">
-                            <div class="form-group">
-                                <label for="largeInput">Kode Invoice</label>
-                                <input type="text" name="kode_invoice" class="form-control form-control" id="defaultInput" value="<?= $data['kode_invoice']; ?>" readonly>
-                            </div>
-                            <div class="form-group">
-                                <label for="largeInput">Outlet</label>
-                                <input type="text" name="" class="form-control form-control" id="defaultInput" value="<?= $data['nama_outlet']; ?>" readonly>
-                            </div>
-                            <div class="form-group">
-                                <label for="largeInput">Pelanggan</label>
-                                <input type="text" name="" class="form-control form-control" id="defaultInput" value="<?= $data['nama_pelanggan']; ?>" readonly>
-                            </div>
-                            <div class="form-group">
-                                <label for="largeInput">Jenis_paket</label>
-                                <input type="text" name="" class="form-control form-control" id="defaultInput" value="<?= $data['nama_paket']; ?>" readonly>
-                            </div>
-                            <div class="form-group">
-                                <label for="largeInput">Jumlah</label>
-                                <input type="text" name="qty" class="form-control form-control" id="defaultInput" value="<?= $data['qty']; ?>" readonly>
-                            </div>
-                            <div class="form-group">
-                                <label for="largeInput">Total Harga</label>
-                                <input type="text" name="biaya_tambahan" class="form-control form-control" id="defaultInput" value="<?= $data['total_harga']; ?>" readonly>
-                            </div>
-                            <?php if ($data['total_bayar'] > 0) : ?>
-                                <div class="form-group">
-                                    <label for="largeInput">Total Bayar</label>
-                                    <input type="text" name="biaya_tambahan" class="form-control form-control" id="defaultInput" value="<?= $data['total_bayar']; ?>" readonly>
+                            <form class="form form-vertical" action="bayar.php?id=<?= $data['id_transaksi']; ?>" method="POST">
+                                <div class="form-body">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label for="first-name-vertical">Kode Invoice</label>
+                                                <input type="text" id="first-name-vertical" class="form-control" name="kode_invoice" value="<?= $data['kode_invoice']; ?>" readonly>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="first-name-vertical">Nama Pelanggan</label>
+                                                <input type="text" id="first-name-vertical" class="form-control" name="nama_pelanggan" value="<?= $data['nama_pelanggan']; ?>" readonly>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="first-name-vertical">Jenis Paket</label>
+                                                <input type="text" id="first-name-vertical" class="form-control" name="jenis_paket" value="<?= $data['nama_paket']; ?>" readonly>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="first-name-vertical">Jumlah</label>
+                                                <input type="text" id="first-name-vertical" class="form-control" name="jumlah" value="<?= $data['qty']; ?>" readonly>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="first-name-vertical">Total Harga</label>
+                                                <input type="text" id="first-name-vertical" class="form-control" name="total_harga" value="<?= 'Rp ' . number_format($data['total_harga']); ?>" readonly>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="first-name-vertical">Total Bayar</label>
+                                                <input type="text" id="first-name-vertical" class="form-control" name="total_bayar" value="<?= 'Rp ' . number_format($data['total_bayar']); ?>" readonly>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="first-name-vertical">Tanggal Dibayar</label>
+                                                <input type="text" id="first-name-vertical" class="form-control" name="total_harga" value="<?= $data['tgl_pembayaran']; ?>" readonly>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="defaultSelect">Status Transaksi</label>
+                                                <select name="status" class="form-select" id="defaultSelect">
+                                                    <?php foreach ($status as $key) : ?>
+                                                        <?php if ($key == $data['status']) : ?>
+                                                            <option value="<?= $key ?>" selected><?= $key ?></option>
+                                                        <?php endif ?>
+                                                        <option value="<?= $key ?>"><?= $key ?></option>
+                                                    <?php endforeach ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 d-flex justify-content-end">
+                                            <button type="submit" name="btn-simpan" class="btn btn-primary me-1 mb-1">Submit</button>
+                                            <button href="javascript:void(0)" onclick="window.history.back();" type="reset" class="btn btn-light-secondary me-1 mb-1">Batal</button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="largeInput">Tanggal Dibayar</label>
-                                    <input type="text" name="biaya_tambahan" class="form-control form-control" id="defaultInput" value="<?= $data['tgl_pembayaran']; ?>" readonly>
-                                </div>
-                            <?php else : ?>
-                                <div class="form-group">
-                                    <label for="largeInput">Total Bayar</label>
-                                    <input type="text" name="biaya_tambahan" class="form-control form-control" id="defaultInput" value="Belum Melakukan Pembayaran" readonly>
-                                </div>
-                                <div class="form-group">
-                                    <label for="largeInput">Batas Waktu Pembayaran</label>
-                                    <input type="text" name="biaya_tambahan" class="form-control form-control" id="defaultInput" value="<?= $data['batas_waktu']; ?>" readonly>
-                                </div>
-                            <?php endif; ?>
-                            <div class="form-group">
-                                <label for="">Status Transaksi</label>
-                                <select name="status" class="form-control form-control" id="defaultSelect">
-                                    <?php foreach ($status as $key) : ?>
-                                        <?php if ($key == $data['status']) : ?>
-                                            <option value="<?= $key ?>" selected><?= $key ?></option>
-                                        <?php endif ?>
-                                        <option value="<?= $key ?>"><?= $key ?></option>
-                                    <?php endforeach ?>
-                                </select>
-                            </div>
-                            <div class="card-action">
-                                <button type="submit" name="btn-simpan" class="btn btn-success">Submit</button>
-                                <!-- <button class="btn btn-danger">Cancel</button> -->
-                                <a href="javascript:void(0)" onclick="window.history.back();" class="btn btn-danger">Batal</a>
-                            </div>
-                    </form>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
+            <!-- // Basic Vertical form layout section end -->
+        </section>
 </div>
+<!-- End Content -->
+
 <?php require 'footer.php'; ?>

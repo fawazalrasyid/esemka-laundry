@@ -66,7 +66,7 @@ require 'header.php';
                                         </div>
                                         <div class="form-group">
                                             <label for="defaultSelect">Jenis Kelamin</label>
-                                            <select name="jenis_kelamin" class="form-control form-control"
+                                            <select name="jenis_kelamin" class="form-select"
                                                 id="defaultSelect">
                                                 <option value="L">Laki-laki</option>
                                                 <option value="P">Perempuan</option>

@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>eLaundry - Login</title>
-    <link rel="stylesheet" href="assets/css/bootstrap.css">
+    <title>Login - eLaundry</title>
 
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
     <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/x-icon">
     <link rel="stylesheet" href="assets/css/app.css">
 </head>
@@ -26,27 +26,25 @@
                             </div>
                             <form action="cek_login.php" method="post">
                                 <?php if (isset($_GET['message'])) : ?>
-                                <div class="alert alert-danger text-center">
-                                    <small role="alert">
-                                        <?= $_GET['message']; ?>
-                                    </small>
-                                </div>
+                                    <div class="alert alert-danger text-center">
+                                        <small role="alert">
+                                            <?= $_GET['message']; ?>
+                                        </small>
+                                    </div>
                                 <?php endif ?>
                                 <div class="form-group position-relative has-icon-left">
                                     <label for="username">Username</label>
                                     <div class="position-relative">
-                                        <input type="text" name="username" placeholder="Username" class="form-control"
-                                            id="username">
+                                        <input type="text" name="username" id="username" class="form-control" placeholder="Username">
                                         <div class="form-control-icon">
                                             <i data-feather="user"></i>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group position-relative has-icon-left mb-5">
+                                <div class="form-group position-relative has-icon-left mb-4">
                                     <label for="username">Password</label>
                                     <div class="position-relative">
-                                        <input type="password" name="password" placeholder="Password"
-                                            class="form-control" id="password">
+                                        <input type="password" name="password" id="password" class="form-control" placeholder="Password">
                                         <div class="form-control-icon">
                                             <i data-feather="lock"></i>
                                         </div>
@@ -63,10 +61,11 @@
         </div>
 
     </div>
+
     <script src="assets/js/feather-icons/feather.min.js"></script>
     <script src="assets/js/app.js"></script>
-
     <script src="assets/js/main.js"></script>
+
 </body>
 
 </html>

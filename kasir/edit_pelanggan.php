@@ -9,10 +9,9 @@ $queryedit = mysqli_query($conn, $query);
 if (isset($_POST['btn-simpan'])) {
     $nama = $_POST['nama_pelanggan'];
     $alamat = $_POST['alamat_pelanggan'];
-    $no_ktp = $_POST['no_ktp'];
     $telp = $_POST['telp_pelanggan'];
     $jenis_kelamin = $_POST['jenis_kelamin'];
-    $query = "UPDATE pelanggan SET nama_pelanggan = '$nama', alamat_pelanggan = '$alamat', no_ktp = '$no_ktp', telp_pelanggan = '$telp', jenis_kelamin = '$jenis_kelamin' WHERE id_pelanggan = $id";
+    $query = "UPDATE pelanggan SET nama_pelanggan = '$nama', alamat_pelanggan = '$alamat', telp_pelanggan = '$telp', jenis_kelamin = '$jenis_kelamin' WHERE id_pelanggan = $id";
 
     $update = mysqli_query($conn, $query);
     if ($update == 1) {
@@ -26,77 +25,83 @@ if (isset($_POST['btn-simpan'])) {
 
 require 'header.php';
 ?>
-<div class="content">
-    <div class="page-inner">
-        <div class="page-header">
-            <h4 class="page-title">Forms</h4>
-            <ul class="breadcrumbs">
-                <li class="nav-home">
-                    <a href="index.php">
-                        <i class="flaticon-home"></i>
-                    </a>
-                </li>
-                <li class="separator">
-                    <i class="flaticon-right-arrow"></i>
-                </li>
-                <li class="nav-item">
-                    <a href="pelanggan.php">Pelanggan</a>
-                </li>
-                <li class="separator">
-                    <i class="flaticon-right-arrow"></i>
-                </li>
-                <li class="nav-item">
-                    <a href="#">Edit Pelanggan</a>
-                </li>
-            </ul>
-        </div>
-        <div class="row">
-            <div class="col-md-10">
+
+<!-- Content -->
+<div class="main-content container-fluid">
+
+    <div class="page-title mb-5">
+        <h3><?= $title; ?></h3>
+    </div>
+
+    <section class="section">
+        <!-- Basic Vertical form layout section start -->
+        <section id="basic-vertical-layouts">
+            <div class="col-md-10 col-12">
                 <div class="card">
                     <div class="card-header">
-                        <div class="card-title"><?= $title; ?></div>
+                        <h4 class="card-title">Data Pelanggan</h4>
                     </div>
-                    <?php while ($edit = mysqli_fetch_array($queryedit)) {
+                    <div class="card-content">
+                        <div class="card-body">
+                            <?php while ($edit = mysqli_fetch_array($queryedit)) {
                     ?>
-                        <form action="" method="POST">
-                            <div class="card-body">
-                                <div class="form-group">
-                                    <label for="largeInput">No KTP Pelanggan</label>
-                                    <input type="text" name="no_ktp" class="form-control form-control" id="defaultInput" value="<?= $edit['no_ktp']; ?>" placeholder="No KTP...">
-                                </div>
-                                <div class="form-group">
-                                    <label for="largeInput">Nama Pelanggan</label>
-                                    <input type="text" name="nama_pelanggan" class="form-control form-control" id="defaultInput" value="<?= $edit['nama_pelanggan']; ?>" placeholder="Nama...">
-                                </div>
-                                <div class="form-group">
-                                    <label for="alamat">Alamat Pelanggan</label>
-                                    <textarea class="form-control" rows="5" name="alamat_pelanggan"><?= $edit['alamat_pelanggan']; ?></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="largeInput">No Telepon</label>
-                                    <input type="text" name="telp_pelanggan" class="form-control form-control" id="defaultInput" value="<?= $edit['telp_pelanggan']; ?>" placeholder="No Telp...">
-                                </div>
-                                <div class="form-group">
-                                    <label for="defaultSelect">Jenis Kelamin</label>
-                                    <select name="jenis_kelamin" class="form-control form-control" id="defaultSelect">
-                                        <option value="L" <?php if ($edit['jenis_kelamin'] == 'L') {
+                            <form class="form form-vertical" action="" method="POST">
+                                <div class="form-body">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label for="first-name-vertical">Nama Pengguna</label>
+                                                <input type="text" id="first-name-vertical" class="form-control"
+                                                    name="nama_pelanggan" value="<?= $edit['nama_pelanggan']; ?>"
+                                                    placeholder="Nama">
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group mb-3">
+                                                <label for="exampleFormControlTextarea1" class="form-label">Alamat
+                                                    Pelanggan</label>
+                                                <textarea class="form-control" id="exampleFormControlTextarea1"
+                                                    name="alamat_pelanggan"
+                                                    rows="3"><?= $edit['alamat_pelanggan']; ?></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label for="contact-info-vertical">No Telepon</label>
+                                                <input type="number" id="contact-info-vertical" class="form-control"
+                                                    name="telp_pelanggan" value="<?= $edit['telp_pelanggan']; ?>"
+                                                    placeholder="No Telp">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="defaultSelect">Jenis Kelamin</label>
+                                            <select name="jenis_kelamin" class="form-select"
+                                                id="defaultSelect">
+                                                <option value="L" <?php if ($edit['jenis_kelamin'] == 'L') {
                                                                 echo "selected";
                                                             } ?>>Laki-laki</option>
-                                        <option value="P" <?php if ($edit['jenis_kelamin'] == 'P') {
+                                                <option value="P" <?php if ($edit['jenis_kelamin'] == 'P') {
                                                                 echo "selected";
                                                             } ?>>Perempuan</option>
-                                    </select>
+                                            </select>
+                                        </div>
+                                        <div class="col-12 d-flex justify-content-end">
+                                            <button type="submit" name="btn-simpan"
+                                                class="btn btn-primary me-1 mb-1">Submit</button>
+                                            <button href="javascript:void(0)" onclick="window.history.back();"
+                                                type="reset" class="btn btn-light-secondary me-1 mb-1">Batal</button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="card-action">
-                                    <button type="submit" name="btn-simpan" class="btn btn-success">Submit</button>
-                                    <!-- <button class="btn btn-danger">Cancel</button> -->
-                                    <a href="javascript:void(0)" onclick="window.history.back();" class="btn btn-danger">Batal</a>
-                                </div>
-                        </form>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
+            <!-- // Basic Vertical form layout section end -->
+        </section>
 </div>
 <?php } ?>
+<!-- End Content -->
+
 <?php require 'footer.php';

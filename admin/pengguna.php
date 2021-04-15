@@ -2,7 +2,7 @@
 $title = 'Pengguna';
 require 'koneksi.php';
 
-$data = mysqli_query($conn, 'SELECT * FROM user ORDER BY role desc');
+$data = mysqli_query($conn, 'SELECT * FROM user ORDER BY role asc');
 
 require 'header.php';
 ?>

@@ -7,45 +7,37 @@ $query = mysqli_query($conn, "SELECT transaksi.*, pelanggan.nama_pelanggan, deta
 $data = mysqli_fetch_assoc($query);
 
 ?>
-<div class="content">
-    <div class="page-inner">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-title"><?= $title; ?></div>
+
+<!-- Content -->
+<div class="main-content container-fluid">
+
+    <div class="page-title mb-5">
+        <h3><?= $title; ?></h3>
+    </div>
+
+    <section class="section">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <!-- <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js">
+                    </script> -->
+                    <!-- <div class="row justify-content-center align-items-center">
+                        <lottie-player src="https://assets10.lottiefiles.com/packages/lf20_udsg68fb.json" background="transparent" speed="1" style="width: 300px; height: 300px;" autoplay></lottie-player>
+                    </div> -->
+                    <div class="row text-center mt-5 mb-3">
+                        <h4>Pesanan atas nama</h3>
+                            <h3 class="font-bold mb-3"><?= $data['nama_pelanggan'] ?></h6>
+                                <h4>Berhasil di bayar
+                            </h3>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 mt-3">
-                            <div class="white-box">
-                                <div class="row">
-                                    <div class="col-md-4"></div>
-                                    <div class="col-md-4 text-center" style="padding-left: 50px;padding-right: 50px;">
-                                        <div class="bg-success" style="font-size: 30px;border-radius: 30px">
-                                            <i class="fa fa-check fa-10x text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4"></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12 text-center mb-5">
-                                        <br>
-                                        <h4>Pesanan Atas Nama</h4>
-                                        <h2><strong> <?= $data['nama_pelanggan'] ?></strong></h2>
-                                        <h4> Berhasil Di Bayar</h4>
-                                        <h3><strong>Kode Invoice <?= $data['kode_invoice'] ?></strong><br><br></h3>
-                                        <h3><strong>Total Pembayaran <?= 'Rp ' . number_format($data['total_harga']); ?></strong><br></h3>
-                                        <h3><strong>Total Uang Bayar <?= 'Rp ' . number_format($data['total_bayar']); ?></strong><br></h3>
-                                        <h3><strong>Kembalian <?= 'Rp ' . number_format($data['total_bayar'] - $data['total_harga']); ?></strong><br><br></h3>
-                                        <a href="transaksi.php" class="btn btn-primary">Kembali Ke Menu Utama</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="button text-center mb-5">
+                        <a href="transaksi.php" class="btn btn-primary">Kembali Ke Menu Utama</a>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 </div>
+<!-- End Content -->
+
 <?php require 'footer.php'; ?>

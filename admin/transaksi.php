@@ -8,55 +8,49 @@ $data = mysqli_query($conn, $query);
 require 'header.php';
 ?>
 
-<div class="panel-header bg-primary-gradient">
-    <div class="page-inner py-5">
-        <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
-            <div>
-                <h2 class="text-white pb-2 fw-bold">Dashboard</h2>
-            </div>
-        </div>
-        <?php if (isset($_GET['msg'])) : ?>
-        <div class="alert alert-success" id="msg"><?= $_GET['msg'] ?></div>
-        <?php endif ?>
-    </div>
-</div>
-<div class="page-inner mt--5">
+<!-- Content -->
+<div class="main-content container-fluid">
 
-    <diva class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <div class="d-flex align-items-center">
-                        <h4 class="card-title"><?= $title; ?></h4>
-                        <a href="cari.php" class="btn btn-primary btn-round ml-auto mr-2">
-                            <i class="fa fa-plus"></i>
-                            Tambah Transaksi
-                        </a>
-                        <a href="konfirmasi.php" class="btn btn-primary btn-round">
-                            <i class="fas fa-user-check"></i>
-                            Konfirmasi Pembayaran
-                        </a>
-                    </div>
+    <div class="page-title mb-5">
+        <h3><?= $title; ?></h3>
+    </div>
+
+    <?php if (isset($_SESSION['msg']) && $_SESSION['msg'] <> '') { ?>
+        <div class="alert alert-success mb-5" role="alert" id="msg">
+            <?= $_SESSION['msg']; ?>
+        </div>
+    <?php }
+    $_SESSION['msg'] = ''; ?>
+
+    <section class="section">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h4>Data Transaksi</h4>
+                <div class="buttons">
+                    <a href="konfirmasi.php" class="btn icon icon-left btn-primary"><i data-feather="check-square"></i>
+                        Konfirmasi Pembayaran</a>
+                    <a href="cari.php" class="btn icon icon-left btn-primary"><i data-feather="plus-square"></i>
+                        Tambah Transaksi</a>
                 </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table id="basic-datatables" class="display table table-striped table-hover">
-                            <thead>
-                                <tr>
-                                    <th style="width: 7%">#</th>
-                                    <th>Kode</th>
-                                    <th>Nama Pelanggan</th>
-                                    <th>Status</th>
-                                    <th>Pembayaran</th>
-                                    <th>Total</th>
-                                    <th style="width: 5%;">Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                $no = 1;
-                                if (mysqli_num_rows($data) > 0) {
-                                    while ($trans = mysqli_fetch_assoc($data)) {
+            </div>
+            <div class="card-body">
+                <table id="table1" class='table table-striped'>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Kode</th>
+                            <th>Nama Pelanggan</th>
+                            <th>Status</th>
+                            <th>Pembayaran</th>
+                            <th>Total</th>
+                            <th class="col-sm-2">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $no = 1;
+                        if (mysqli_num_rows($data) > 0) {
+                            while ($trans = mysqli_fetch_assoc($data)) {
                                 ?>
 
                                 <tr>
@@ -67,27 +61,27 @@ require 'header.php';
                                     <td><?= $trans['status_bayar']; ?></td>
                                     <td><?= 'Rp ' . number_format($trans['total_harga']); ?></td>
                                     <td>
-                                        <div class="form-button-action">
-                                            <a href="detail.php?id=<?= $trans['id_transaksi']; ?>" type="button"
-                                                data-toggle="tooltip" title="" class="btn btn-primary"
-                                                data-original-title="Detail">
-                                                <i class="far fa-eye"></i> Detail
-                                            </a>
+                                        <div class="buttons d-flex justify-content-between">
+                                            <a href="detail.php?id=<?= $trans['id_transaksi']; ?>" class="btn btn-sm btn-primary">
+                                                Detail</a>
                                         </div>
+
                                     </td>
                                 </tr>
-                                <?php }
-                                }
-                                ?>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                        <?php }
+                        }
+                        ?>
+
+
+                    </tbody>
+                </table>
             </div>
         </div>
 
+    </section>
 </div>
-</div>
+<!-- End Content -->
+
 <?php
 require 'footer.php';
 ?>

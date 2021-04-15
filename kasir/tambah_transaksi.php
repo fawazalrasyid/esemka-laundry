@@ -44,7 +44,7 @@ if (isset($_POST['btn-simpan'])) {
         $query_detail = "INSERT INTO detail_transaksi (id_transaksi, id_paket, qty, total_harga) VALUES ('$id_transaksi', '$id_paket', '$qty', '$total')";
         $insert_detail = mysqli_query($conn, $query_detail);
         if ($insert_detail == 1) {
-            // $_SESSION['msg'] = 'Berhasil menambahkan ';
+            $_SESSION['msg'] = 'Berhasil menambahkan ';
             header('location:transaksi_sukses.php?id=' . $id_transaksi);
         } else {
             $_SESSION['msg'] = "<div class='alert alert-danger'>Gagal transaksi!!!</div>";
@@ -55,96 +55,79 @@ if (isset($_POST['btn-simpan'])) {
 
 require 'header.php';
 ?>
-<div class="content">
-    <div class="page-inner">
-        <div class="page-header">
-            <h4 class="page-title">Forms</h4>
-            <ul class="breadcrumbs">
-                <li class="nav-home">
-                    <a href="index.php">
-                        <i class="flaticon-home"></i>
-                    </a>
-                </li>
-                <li class="separator">
-                    <i class="flaticon-right-arrow"></i>
-                </li>
-                <li class="nav-item">
-                    <a href="transaksi.php">Transaksi</a>
-                </li>
-                <li class="separator">
-                    <i class="flaticon-right-arrow"></i>
-                </li>
-                <li class="nav-item">
-                    <a href="#"><?= $title; ?></a>
-                </li>
-            </ul>
-            <?php if (isset($_SESSION['msg']) && $_SESSION['msg'] <> '') { ?>
-            <div class="alert alert-success" role="alert" id="msg">
-                <?= $_SESSION['msg']; ?>
-            </div>
-            <?php }
-            $_SESSION['msg'] = ''; ?>
-        </div>
-        <div class="row">
-            <div class="col-md-10">
+
+<!-- Content -->
+<div class="main-content container-fluid">
+
+    <div class="page-title mb-5">
+        <h3><?= $title; ?></h3>
+    </div>
+
+    <section class="section">
+        <!-- Basic Vertical form layout section start -->
+        <section id="basic-vertical-layouts">
+            <div class="col-md-10 col-12">
                 <div class="card">
                     <div class="card-header">
-                        <div class="card-title"><?= $title; ?></div>
+                        <h4 class="card-title">Data Outlet</h4>
                     </div>
-                    <form action="" method="POST">
+                    <div class="card-content">
                         <div class="card-body">
-                            <div class="form-group">
-                                <label for="largeInput">Kode Invoice</label>
-                                <input type="text" name="kode_invoice" class="form-control form-control"
-                                    id="defaultInput" value="<?= $kode; ?>" readonly>
-                            </div>
-                            <div class="form-group">
-                                <label for="largeInput">Outlet</label>
-                                <input type="text" name="" class="form-control form-control" id="defaultInput"
-                                    value="<?= $outlet['nama_outlet']; ?>" readonly>
-                            </div>
-                            <div class="form-group">
-                                <label for="largeInput">Pelanggan</label>
-                                <input type="text" name="" class="form-control form-control" id="defaultInput"
-                                    value="<?= $pelanggan['nama_pelanggan']; ?>" readonly>
-                            </div>
-                            <div class="form-group">
-                                <label for="defaultSelect">Pilih Paket</label>
-                                <select name="id_paket" class="form-control form-control" id="defaultSelect">
-                                    <?php while ($key = mysqli_fetch_array($paket)) { ?>
-                                    <option value="<?= $key['id_paket']; ?>"><?= $key['nama_paket']; ?></option>
-                                    <?php } ?>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="largeInput">Jumlah</label>
-                                <input type="text" name="qty" class="form-control form-control" id="defaultInput">
-                            </div>
-                            <div class="form-group">
-                                <label for="largeInput">Biaya Tambahan</label>
-                                <input type="text" name="biaya_tambahan" class="form-control form-control"
-                                    id="defaultInput" value="0">
-                            </div>
-                            <div class="form-group">
-                                <label for="largeInput">Diskon (%)</label>
-                                <input type="text" name="diskon" class="form-control form-control" id="defaultInput"
-                                    value="0">
-                            </div>
-                            <div class="form-group">
-                                <label for="largeInput">Pajak</label>
-                                <input type="text" name="pajak" class="form-control form-control" id="defaultInput"
-                                    value="0">
-                            </div>
-                            <div class="card-action">
-                                <button type="submit" name="btn-simpan" class="btn btn-success">Submit</button>
-                                <!-- <button class="btn btn-danger">Cancel</button> -->
-                                <a href="javascript:void(0)" onclick="window.history.back();"
-                                    class="btn btn-danger">Batal</a>
-                            </div>
-                    </form>
+                            <form class="form form-vertical" action="" method="POST">
+                                <div class="form-body">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label for="first-name-vertical">Kode Invoice</label>
+                                                <input type="text" id="first-name-vertical" class="form-control" name="kode_invoice" value="<?= $kode; ?>" readonly>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="first-name-vertical">Outlet</label>
+                                                <input type="text" id="first-name-vertical" class="form-control" name="" value="<?= $outlet['nama_outlet']; ?>" readonly>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="first-name-vertical">Pelanggan</label>
+                                                <input type="text" id="first-name-vertical" class="form-control" name="" value="<?= $pelanggan['nama_pelanggan']; ?>" readonly>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="defaultSelect">Pilih Paket</label>
+                                                <select name="id_paket" class="form-select" id="paket">
+                                                    <?php while ($key = mysqli_fetch_array($paket)) { ?>
+                                                        <option value="<?= $key['id_paket']; ?>"><?= $key['nama_paket']; ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="first-name-vertical">Jumlah</label>
+                                                <input type="text" id="first-name-vertical" class="form-control" name="qty">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="first-name-vertical">Biaya Tambahan</label>
+                                                <input type="text" id="first-name-vertical" class="form-control" name="biaya_tambahan" value="0">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="first-name-vertical">Dsikon(%)</label>
+                                                <input type="text" id="first-name-vertical" class="form-control" name="diskon" value="0">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="first-name-vertical">Pajak</label>
+                                                <input type="text" id="first-name-vertical" class="form-control" name="pajak" value="0">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 d-flex justify-content-end">
+                                            <button type="submit" name="btn-simpan" class="btn btn-primary me-1 mb-1">Submit</button>
+                                            <button href="javascript:void(0)" onclick="window.history.back();" type="reset" class="btn btn-light-secondary me-1 mb-1">Batal</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
+            <!-- // Basic Vertical form layout section end -->
+        </section>
 </div>
+<!-- End Content -->
+
 <?php require 'footer.php'; ?>

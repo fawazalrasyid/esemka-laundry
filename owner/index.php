@@ -18,17 +18,8 @@ $jumlah_outlet = mysqli_fetch_assoc($query3);
 $query4 = mysqli_query($conn, "SELECT SUM(total_harga) as total_penghasilan FROM detail_transaksi INNER JOIN transaksi ON transaksi.id_transaksi = detail_transaksi.id_transaksi WHERE status_bayar = 'dibayar'");
 $total_penghasilan = mysqli_fetch_assoc($query4);
 
-$query5 = mysqli_query($conn, "SELECT SUM(total_harga) as penghasilan_tahun FROM detail_transaksi INNER JOIN transaksi ON transaksi.id_transaksi = detail_transaksi.id_transaksi WHERE status_bayar = 'dibayar' AND YEAR(tgl_pembayaran) = YEAR(NOW())");
-$penghasilan_tahun = mysqli_fetch_assoc($query5);
-
-$query6 = mysqli_query($conn, "SELECT SUM(total_harga) as penghasilan_bulan FROM detail_transaksi INNER JOIN transaksi ON transaksi.id_transaksi = detail_transaksi.id_transaksi WHERE status_bayar = 'dibayar' AND MONTH(tgl_pembayaran) = MONTH(NOW())");
-$penghasilan_bulan = mysqli_fetch_assoc($query6);
-
-$query7 = mysqli_query($conn, "SELECT SUM(total_harga) as penghasilan_minggu FROM detail_transaksi INNER JOIN transaksi ON transaksi.id_transaksi = detail_transaksi.id_transaksi WHERE status_bayar = 'dibayar' AND WEEK(tgl_pembayaran) = WEEK(NOW())");
-$penghasilan_minggu = mysqli_fetch_assoc($query7);
-
-$query8 = mysqli_query($conn, "SELECT MONTHNAME(tgl_pembayaran) as bulan, SUM(total_harga) as penghasilan_bulan FROM detail_transaksi INNER JOIN transaksi ON transaksi.id_transaksi = detail_transaksi.id_transaksi WHERE status_bayar = 'dibayar' AND YEAR(tgl_pembayaran) = YEAR(NOW()) GROUP BY MONTH(tgl_pembayaran)");
-while($penghasilan_perbulan = mysqli_fetch_array($query8)){
+$query5 = mysqli_query($conn, "SELECT MONTHNAME(tgl_pembayaran) as bulan, SUM(total_harga) as penghasilan_bulan FROM detail_transaksi INNER JOIN transaksi ON transaksi.id_transaksi = detail_transaksi.id_transaksi WHERE status_bayar = 'dibayar' AND YEAR(tgl_pembayaran) = YEAR(NOW()) GROUP BY MONTH(tgl_pembayaran)");
+while($penghasilan_perbulan = mysqli_fetch_array($query5)){
 	$nama_bulan[] = $penghasilan_perbulan['bulan'];
     $total_penghasilan_perbulan[] = $penghasilan_perbulan['penghasilan_bulan'];
 }
@@ -155,7 +146,7 @@ var optionsMonthlySales = {
     }],
     colors: '#0D6EFD',
     xaxis: {
-        categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        categories: <?php echo json_encode($nama_bulan); ?>
     },
 }
 

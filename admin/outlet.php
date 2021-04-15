@@ -3,7 +3,7 @@ $title = 'Outlet';
 require 'koneksi.php';
 require 'header.php';
 
-$query = 'SELECT outlet.*, user.nama_user FROM outlet LEFT JOIN user ON user.outlet_id = outlet.id_outlet';
+$query = 'SELECT * FROM outlet';
 $data = mysqli_query($conn, $query);
 ?>
 
@@ -37,7 +37,6 @@ $data = mysqli_query($conn, $query);
                         <tr>
                             <th>#</th>
                             <th>Nama</th>
-                            <th>Owner</th>
                             <th>No Telepon</th>
                             <th>Alamat</th>
                             <th class="col-sm-2">Aksi</th>
@@ -53,12 +52,6 @@ $data = mysqli_query($conn, $query);
                         <tr>
                             <td><?= $no++; ?></td>
                             <td><?= $outlet['nama_outlet']; ?></td>
-                            <td><?php if ($outlet['nama_user'] == null) {
-                                                    echo "Belum ada owner";
-                                                } else {
-                                                    echo $outlet['nama_user'];
-                                                } ?>
-                            </td>
                             <td><?= $outlet['telp_outlet']; ?></td>
                             <td><?= $outlet['alamat_outlet']; ?></td>
                             <td>

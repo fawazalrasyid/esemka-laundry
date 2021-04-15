@@ -13,7 +13,7 @@ setlocale(LC_TIME, 'id_ID.utf8');
 
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Cetak Laporan</title>
+    <title>laporan-transaksi-laundry_<?= date('dmY'); ?></title>
     <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
     <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/x-icon">
 
@@ -63,35 +63,35 @@ setlocale(LC_TIME, 'id_ID.utf8');
                     <th>#</th>
                     <th>Kode</th>
                     <th>Nama Pelanggan</th>
-                    <th>Total</th>
-                    <th>Outlet Pembayaran</th>
                     <th>Status</th>
                     <th>Pembayaran</th>
+                    <th>Total</th>
+                    <th>Outlet Pembayaran</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-            $no = 1;
-            if (mysqli_num_rows($data) > 0) {
-                while ($trans = mysqli_fetch_assoc($data)) {
-            ?>
+                $no = 1;
+                if (mysqli_num_rows($data) > 0) {
+                    while ($trans = mysqli_fetch_assoc($data)) {
+                        ?>
 
-                <tr>
-                    <td><?= $no++; ?></td>
-                    <td><?= $trans['kode_invoice']; ?></td>
-                    <td><?= $trans['nama_pelanggan']; ?></td>
-                    <td><?= 'Rp ' . number_format($trans['total_harga']); ?></td>
-                    <td><?= $trans['nama_outlet']; ?></td>
-                    <td><?= $trans['status']; ?></td>
-                    <td><?= $trans['status_bayar']; ?></td>
-                </tr>
+                        <tr>
+                            <td><?= $no++; ?></td>
+                            <td><?= $trans['kode_invoice']; ?></td>
+                            <td><?= $trans['nama_pelanggan']; ?></td>
+                            <td><?= $trans['status']; ?></td>
+                            <td><?= $trans['status_bayar']; ?></td>
+                            <td><?= 'Rp ' . number_format($trans['total_harga']); ?></td>
+                            <td><?= $trans['nama_outlet']; ?></td>
+                        </tr>
                 <?php }
-            }
-            ?>
+                }
+                ?>
             </tbody>
         </table>
         <script>
-        window.print();
+            window.print();
         </script>
     </div>
     <script src="assets/js/app.js"></script>
